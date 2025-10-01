@@ -23,7 +23,7 @@ router.delete("/:id", async (req, res) => {
         res.status(500).json({ error: "Failed to delete comment" });
     }
 });
-// Add a new comment
+// Add a new comment endpoint
 router.post("/", async (req, res) => {
   const { text, author } = req.body;
   if (!text || !author) {
