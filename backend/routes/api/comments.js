@@ -23,3 +23,17 @@ router.delete("/:id", async (req, res) => {
         res.status(500).json({ error: "Failed to delete comment" });
     }
 });
+// Add a new comment
+router.post("/", async (req, res) => {
+  const { text, author } = req.body;
+  if (!text || !author) {
+    return res.status(400).json({ error: "Text and author are required" });
+  }
+  try {
+    const newComment = new Comment({ text, author });
+    await newComment.save();
+    res.status(201).json(newComment);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to add comment" });
+  }
+});
